@@ -12,6 +12,14 @@ cpu_usage = psutil.cpu_percent()
 memory = psutil.virtual_memory()
 disk = psutil.disk_usage("/")
 
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+s.connect(("8.8.8.8", 80))
+
+ip_address = s.getsockname()[0]
+
+s.close()
+
 print("\n=== System Information ===")
 print(f"Computer Name : {computer_name}")
 print(f"Operating System : {operating_system}")
@@ -34,3 +42,5 @@ print(f"Used Disk : {disk.used / (1024 ** 3):.2f} GB")
 print(f"Free Disk : {disk.free / (1024 ** 3):.2f} GB")
 print(f"Disk Usage : {disk.percent}%")
 
+print("\n=== Network Information ===")
+print(f"Local IP Address : {ip_address}")

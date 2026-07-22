@@ -1,6 +1,7 @@
 import platform
 import socket
 import psutil
+from datetime import datetime
 
 
 computer_name = socket.gethostname()
@@ -44,3 +45,42 @@ print(f"Disk Usage : {disk.percent}%")
 
 print("\n=== Network Information ===")
 print(f"Local IP Address : {ip_address}")
+
+report = f"""
+===== System Information Report =====
+
+Computer Name : {computer_name}
+Operating System : {operating_system}
+OS Version : {os_version}
+
+CPU
+----------------
+Physical Cores : {cpu_cores}
+Logical Cores : {cpu_threads}
+CPU Usage : {cpu_usage}%
+
+Memory
+----------------
+Total Memory : {memory.total / (1024 ** 3):.2f} GB
+Used Memory : {memory.used / (1024 ** 3):.2f} GB
+Available Memory : {memory.available / (1024 ** 3):.2f} GB
+Memory Usage : {memory.percent}%
+
+Disk
+----------------
+Total Disk : {disk.total / (1024 ** 3):.2f} GB
+Used Disk : {disk.used / (1024 ** 3):.2f} GB
+Free Disk : {disk.free / (1024 ** 3):.2f} GB
+Disk Usage : {disk.percent}%
+
+Network
+----------------
+Local IP Address : {ip_address}
+
+Generated Time : {datetime.now()}
+"""
+
+with open("system_report.txt", "w", encoding="utf-8") as file:
+    file.write(report)
+
+print("\nReport saved successfully!")

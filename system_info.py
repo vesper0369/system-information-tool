@@ -10,6 +10,7 @@ cpu_cores = psutil.cpu_count(logical=False)
 cpu_threads = psutil.cpu_count(logical=True)
 cpu_usage = psutil.cpu_percent()
 memory = psutil.virtual_memory()
+disk = psutil.disk_usage("/")
 
 print("\n=== System Information ===")
 print(f"Computer Name : {computer_name}")
@@ -26,3 +27,10 @@ print(f"Total Memory : {memory.total / (1024 ** 3):.2f} GB")
 print(f"Used Memory : {memory.used / (1024 ** 3):.2f} GB")
 print(f"Available Memory : {memory.available / (1024 ** 3):.2f} GB")
 print(f"Memory Usage : {memory.percent}%")
+
+print("\n=== Disk Information ===")
+print(f"Total Disk : {disk.total / (1024 ** 3):.2f} GB")
+print(f"Used Disk : {disk.used / (1024 ** 3):.2f} GB")
+print(f"Free Disk : {disk.free / (1024 ** 3):.2f} GB")
+print(f"Disk Usage : {disk.percent}%")
+
